@@ -1,0 +1,19 @@
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card">
+      <div class="card-body p-4">
+        <h2 class="card-title text-center mb-4">Editar Historial Médico — <%= appointment.pet_name %></h2>
+        <form action="/medical/<%= appointment.id %>" method="POST">
+          <div class="mb-3">
+            <label for="medical_notes" class="form-label">Notas Médicas</label>
+            <textarea id="medical_notes" name="medical_notes" class="form-control" rows="8"><%= appointment.medical_notes || '' %></textarea>
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary">Guardar</button>
+            <a href="/" class="btn btn-link text-muted">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
