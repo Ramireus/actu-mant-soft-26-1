@@ -1,0 +1,28 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <div class="card">
+      <div class="card-body p-4">
+        <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
+        <% if (typeof error !== 'undefined') { %>
+          <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+        <form action="/login" method="POST">
+          <div class="mb-3">
+            <label for="username" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="username" name="username" required placeholder="ej: vet@example.com">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary">Entrar</button>
+            <a href="/" class="btn btn-link text-muted">Cancelar</a>
+          </div>
+        </form>
+        <hr>
+        <small class="text-muted">Credenciales seed: vet@example.com / vetpass (Veterinario) — rec@example.com / recpass (Recepcionista)</small>
+      </div>
+    </div>
+  </div>
+</div>

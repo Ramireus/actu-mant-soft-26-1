@@ -32,3 +32,22 @@ exports.deleteAppointment = (req, res) => {
         res.redirect('/');
     });
 };
+
+// Nuevos handlers para editar historial médico
+exports.getEditMedicalForm = (req, res) => {
+    const id = req.params.id;
+    appointmentModel.getById(id, (err, appointment) => {
+        if (err) return res.status(500).send(err.message);
+        if (!appointment) return res.status(404).send('Cita no encontrada');
+        res.render('edit_medical', { title: 'Editar Historial Médico', appointment });
+    });
+};
+
+exports.updateMedical = (req, res) => {
+    const id = req.params.id;
+    const { medical_notes } = req.body;
+    appointmentModel.updateMedicalById(id, medical_notes, (err) => {
+        if (err) return res.status(500).send(err.message);
+        res.redirect('/');
+    });
+};
