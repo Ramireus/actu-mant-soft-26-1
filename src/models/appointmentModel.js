@@ -26,11 +26,36 @@ const appointmentModel = {
         });
     },
 
+    // Actualizar campos médicos completos (diagnóstico, peso, temperatura, medicina)
+    updateMedicalFieldsById(id, medicalData, callback) {
+        const sql = `
+            UPDATE appointments
+            SET diagnosis = ?, weight = ?, temperature = ?, is_medical_consultation = ?, medicine = ?, medical_notes = ?
+            WHERE id = ?
+        `;
+        db.run(sql, [medicalData.diagnosis, medicalData.weight, medicalData.temperature, medicalData.is_medical_consultation, medicalData.medicine, medicalData.medical_notes, id], function (err) {
+            callback(err, this && this.changes);
+        });
+    },
+
     deleteById(id, callback) {
         const sql = "DELETE FROM appointments WHERE id = ?";
         db.run(sql, id, function (err) {
             callback(err, this && this.changes);
         });
+    },
+
+    // Obtener todas las citas de una mascota (para historial)
+    getByPetId(petId, callback) {
+        const sql = `
+            SELECT a.*, o.name as owner_name
+            FROM appointments a
+            LEFT JOIN pets p ON a.pet_id = p.id
+            LEFT JOIN owners o ON p.owner_id = o.id
+            WHERE a.pet_id = ?
+            ORDER BY a.appointment_date DESC
+        `;
+        db.all(sql, [petId], (err, rows) => callback(err, rows));
     }
 };
 

@@ -1,0 +1,23 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>➕ Crear Dueño</h1>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+
+            <form method="POST" action="/owners/create">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre del Dueño *</label>
+                    <input type="text" class="form-control" id="name" name="name" required placeholder="Ej: Juan Pérez">
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Crear Dueño</button>
+                    <a href="/owners" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
