@@ -1,0 +1,130 @@
+<div class="row justify-content-center">
+  <div class="col-md-10 col-lg-8">
+    <div class="card">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-start mb-4">
+          <h2 class="card-title">📋 Detalle de Registro Médico (Solo Lectura)</h2>
+          <a href="/medical/history/<%= record.pet_id %>" class="btn btn-sm btn-secondary">← Volver al Historial</a>
+        </div>
+
+        <!-- Información de la mascota y propietario -->
+        <div class="alert alert-info mb-4">
+          <p class="mb-1">
+            <strong>🐾 Mascota:</strong> <%= record.pet_name %>
+          </p>
+          <p class="mb-0">
+            <strong>👤 Propietario:</strong> <%= record.owner_name %>
+          </p>
+        </div>
+
+        <!-- Información de la cita -->
+        <div class="card mb-4 bg-light">
+          <div class="card-body">
+            <h5 class="card-title">📅 Información de la Cita</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="mb-2">
+                  <strong>Servicio:</strong> <%= record.service || 'N/A' %>
+                </p>
+                <p class="mb-0">
+                  <strong>Fecha:</strong> 
+                  <%= new Date(record.appointment_date).toLocaleDateString('es-ES', { 
+                    year: 'numeric', month: 'long', day: 'numeric', 
+                    hour: '2-digit', minute: '2-digit' 
+                  }) %>
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p class="mb-0">
+                  <strong>Registrado por:</strong> <%= record.recorded_by || 'N/A' %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Datos médicos (SOLO LECTURA) -->
+        <div class="card mb-4 border-primary">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">🏥 Datos Médicos</h5>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <p>
+                  <strong>⚖️ Peso:</strong>
+                </p>
+                <p class="text-muted display-6">
+                  <%= record.weight ? record.weight + ' kg' : 'No registrado' %>
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p>
+                  <strong>🌡️ Temperatura:</strong>
+                </p>
+                <p class="text-muted display-6">
+                  <%= record.temperature ? record.temperature + ' °C' : 'No registrado' %>
+                </p>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <p>
+                <strong>🔍 Diagnóstico:</strong>
+              </p>
+              <p class="text-muted">
+                <%= record.diagnosis || 'No registrado' %>
+              </p>
+            </div>
+
+            <% if (record.is_medical_consultation) { %>
+              <div class="alert alert-warning d-inline-block">
+                <strong>⚕️ Tipo:</strong> Consulta Médica
+              </div>
+            <% } %>
+
+            <hr>
+
+            <div>
+              <p>
+                <strong>💊 Medicina Recetada:</strong>
+              </p>
+              <div class="p-3 bg-light border rounded">
+                <p class="text-muted mb-0">
+                  <%= record.medicine || 'No prescrita' %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notas adicionales -->
+        <% if (record.notes) { %>
+          <div class="card mb-4 border-warning">
+            <div class="card-header bg-warning">
+              <h5 class="mb-0">📝 Notas Adicionales</h5>
+            </div>
+            <div class="card-body">
+              <p class="text-muted"><%= record.notes %></p>
+            </div>
+          </div>
+        <% } %>
+
+        <!-- Fecha de registro -->
+        <div class="text-center text-muted mt-4">
+          <small>
+            Registro creado el <%= new Date(record.created_at).toLocaleDateString('es-ES', { 
+              year: 'numeric', month: 'long', day: 'numeric', 
+              hour: '2-digit', minute: '2-digit', second: '2-digit' 
+            }) %>
+          </small>
+        </div>
+
+        <!-- Botón para volver -->
+        <div class="d-grid gap-2 mt-4">
+          <a href="/medical/history/<%= record.pet_id %>" class="btn btn-secondary">← Volver al Historial Completo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

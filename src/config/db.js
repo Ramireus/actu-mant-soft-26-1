@@ -32,8 +32,31 @@ db.serialize(() => {
                                         status TEXT DEFAULT 'Scheduled',
                                         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                                         pet_id INTEGER,
-                                        medical_notes TEXT DEFAULT ''
+                                        medical_notes TEXT DEFAULT '',
+                                        diagnosis TEXT DEFAULT '',
+                                        weight REAL,
+                                        temperature REAL,
+                                        is_medical_consultation BOOLEAN DEFAULT 0,
+                                        medicine TEXT DEFAULT ''
                 )`);
+
+        // New: Medical Records table (historial clínico completo)
+        db.run(`CREATE TABLE IF NOT EXISTS medical_records (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                appointment_id INTEGER NOT NULL,
+                pet_id INTEGER NOT NULL,
+                diagnosis TEXT NOT NULL,
+                weight REAL,
+                temperature REAL,
+                is_medical_consultation BOOLEAN DEFAULT 0,
+                medicine TEXT NOT NULL,
+                notes TEXT DEFAULT '',
+                recorded_by INTEGER,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY(appointment_id) REFERENCES appointments(id) ON DELETE CASCADE,
+                FOREIGN KEY(pet_id) REFERENCES pets(id) ON DELETE CASCADE,
+                FOREIGN KEY(recorded_by) REFERENCES users(id)
+        )`);
 
         // Users table for authentication
         db.run(`CREATE TABLE IF NOT EXISTS users (

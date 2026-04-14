@@ -1,0 +1,38 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>👤 Gestión de Dueños</h1>
+        <a href="/owners/create" class="btn btn-primary">+ Crear Dueño</a>
+    </div>
+
+    <% if (!owners || owners.length === 0) { %>
+        <div class="alert alert-info">No hay dueños registrados.</div>
+    <% } else { %>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% owners.forEach((owner, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= owner.name %></td>
+                            <td class="text-center">
+                                <a href="/owners/edit/<%= owner.id %>" class="btn btn-sm btn-warning">✏️ Editar</a>
+                                <form method="POST" action="/owners/delete/<%= owner.id %>" style="display:inline;" onsubmit="return confirm('¿Está seguro de eliminar este dueño? Sus mascotas también serán eliminadas.')">
+                                    <button type="submit" class="btn btn-sm btn-danger">🗑️ Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+
+    <a href="/" class="btn btn-secondary mt-3">← Volver al Panel</a>
+</div>

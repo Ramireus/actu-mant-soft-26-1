@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const session = require('express-session');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const authRoutes = require('./routes/authRoutes');
+const ownerRoutes = require('./routes/ownerRoutes');
+const petRoutes = require('./routes/petRoutes');
 
 const app = express();
 
@@ -34,5 +36,7 @@ app.use('/', authRoutes);
 
 // Routes
 app.use('/', appointmentRoutes);
+app.use('/owners', ownerRoutes);
+app.use('/pets', petRoutes);
 
 module.exports = app;

@@ -31,10 +31,18 @@
                                 <%= app.appointment_date %>
                             </p>
 
-                            <form action="/delete/<%= app.id %>" method="POST"
-                                onsubmit="return confirm('¿Eliminar esta cita?')">
-                                <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
-                            </form>
+                            <div class="d-grid gap-2">
+                                <% if (typeof user !== 'undefined' && user && (user.role === 'Veterinario' || user.role === 'Administrador')) { %>
+                                    <a href="/medical/<%= app.id %>" class="btn btn-sm btn-primary">📋 Editar Datos Médicos</a>
+                                <% } %>
+                                <% if (app.pet_id) { %>
+                                    <a href="/medical/history/<%= app.pet_id %>" class="btn btn-sm btn-info">📖 Ver Historial</a>
+                                <% } %>
+                                <form action="/delete/<%= app.id %>" method="POST"
+                                    onsubmit="return confirm('¿Eliminar esta cita?')">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">🗑️ Eliminar</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
