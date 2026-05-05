@@ -4,3 +4,6 @@
 4- Ejecute el app segun el comando registrado en Packagejson
 
 ...Cacharreenlo que lo vamos a modificar a nuestra necesidad.
+
+## Azure Deployment
+Deployed on Azure App Service with CI/CD
