@@ -7,3 +7,22 @@
 
 ## Azure Deployment
 Deployed on Azure App Service with CI/CD
+
+## 🧪 Usuarios de Prueba
+
+| Usuario | Contraseña | Rol |
+|---------|-----------|-----|
+| vet@example.com | password123 | Veterinario |
+| admin@example.com | admin123 | Administrador |
+
+## 🚀 Despliegue
+
+### Producción (Azure)
+- **URL**: https://actu-mant-soft-26-1.azurewebsites.net
+- **CI/CD**: GitHub Actions → Azure App Service
+- **Status**: ✅ Deployado
+
+### Desarrollo Local
+```bash
+npm install
+npm start
