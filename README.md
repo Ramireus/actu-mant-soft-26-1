@@ -12,8 +12,8 @@ Deployed on Azure App Service with CI/CD
 
 | Usuario | Contraseña | Rol |
 |---------|-----------|-----|
-| vet@example.com | password123 | Veterinario |
-| admin@example.com | admin123 | Administrador |
+| vet@example.com | vetpass | Veterinario |
+| rec@example.com | recpass | Recepcionista |
 
 ## 🚀 Despliegue
 
